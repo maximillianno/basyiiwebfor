@@ -1,0 +1,1 @@
+<h1>amdin index</h1>
