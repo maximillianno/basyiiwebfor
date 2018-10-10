@@ -14,13 +14,14 @@ use yii\web\Controller;
 
 class AppController extends Controller
 {
-    public function dd($arr){
-        VarDumper::dump($arr, 10,true);
-//        echo '<pre>'. print_r($arr, true). '</pre>';
-        exit;
+    protected function setMeta($title = '', $keywords = '', $description = '')
+    {
+        $this->view->title = $title;
+        $this->view->registerMetaTag(['name' => 'keywords', 'content' => $keywords]);
+        $this->view->registerMetaTag(['name' => 'description', 'content' => $description]);
     }
+
+
 }
-function dump($arr){
-            VarDumper::dump($arr, 10,true);
-}
+
 

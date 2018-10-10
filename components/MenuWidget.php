@@ -50,12 +50,11 @@ class MenuWidget extends Widget
             if (!$node['parent_id']) {
                 $tree[$id] = &$node;
             } else {
-                //мой вариант
+                //мой вариант (не работает на вложенных)
 //                $tree[$node['parent_id']]['childs'][$id] = $node;
                 $this->data[$node['parent_id']]['childs'][$node['id']] = &$node;
             }
         }
-//        dd($tree);
         return $tree;
     }
 

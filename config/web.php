@@ -8,6 +8,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'ru',
+    'defaultRoute' => 'category/index',
 //    'layout' => 'basic',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -53,7 +54,9 @@ $config = [
             'rules' => [
 //                '<action:(about|login|contact)>' => 'site/<action>',
 //                '<action:\w+>' => 'site/<action>',
+                'category/<id:\d+>/page/<page:\d+>' => 'category/view',
                 'category/<id:\d+>' => 'category/view',
+
 
             ],
         ],
