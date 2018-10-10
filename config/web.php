@@ -53,6 +53,7 @@ $config = [
             'rules' => [
 //                '<action:(about|login|contact)>' => 'site/<action>',
 //                '<action:\w+>' => 'site/<action>',
+                'category/<id:\d+>' => 'category/view',
 
             ],
         ],

@@ -1,16 +1,17 @@
-<?php /** @noinspection PhpLanguageLevelInspection */
+<?php /** @noinspection ALL */
 
 namespace app\models;
 
 use Yii;
 
 /**
- * This is the model class for table "categories".
+ * This is the model class for table "category".
  *
  * @property int $id
- * @property string $title
- * @property int $parent
- * @property string $alias
+ * @property int $parent_id
+ * @property string $name
+ * @property string $keywords
+ * @property string $description
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -19,7 +20,7 @@ class Category extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'categories';
+        return 'category';
     }
 
     /**
@@ -28,10 +29,9 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'parent', 'alias'], 'required'],
-            [['parent'], 'integer'],
-            [['title', 'alias'], 'string', 'max' => 255],
-            [['alias'], 'unique'],
+            [['parent_id'], 'integer'],
+            [['name'], 'required'],
+            [['name', 'keywords', 'description'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,13 +42,14 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'parent' => 'Parent',
-            'alias' => 'Alias',
+            'parent_id' => 'Parent ID',
+            'name' => 'Name',
+            'keywords' => 'Keywords',
+            'description' => 'Description',
         ];
     }
-
     public function getProducts(){
-        return $this->hasMany(Product::class, ['parent' => 'id']);
+        return $this->hasMany(Product::class, ['category_id' => 'id']);
     }
+
 }

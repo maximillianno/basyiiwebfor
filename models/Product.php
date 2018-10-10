@@ -1,19 +1,23 @@
-<?php /** @noinspection PhpLanguageLevelInspection */
+<?php /** @noinspection ALL */
 
 namespace app\models;
 
 use Yii;
 
 /**
- * This is the model class for table "products".
+ * This is the model class for table "product".
  *
  * @property int $id
- * @property string $title
- * @property string $alias
- * @property int $parent
+ * @property int $category_id
+ * @property string $name
  * @property string $content
- * @property string $image
  * @property double $price
+ * @property string $keywords
+ * @property string $description
+ * @property string $img
+ * @property string $hit
+ * @property string $new
+ * @property string $sale
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -22,7 +26,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'products';
+        return 'product';
     }
 
     /**
@@ -31,12 +35,11 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'alias', 'parent', 'content', 'price'], 'required'],
-            [['parent'], 'integer'],
-            [['content'], 'string'],
+            [['category_id', 'name'], 'required'],
+            [['category_id'], 'integer'],
+            [['content', 'hit', 'new', 'sale'], 'string'],
             [['price'], 'number'],
-            [['title', 'alias', 'image'], 'string', 'max' => 255],
-            [['alias'], 'unique'],
+            [['name', 'keywords', 'description', 'img'], 'string', 'max' => 255],
         ];
     }
 
@@ -47,16 +50,21 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'alias' => 'Alias',
-            'parent' => 'Parent',
+            'category_id' => 'Category ID',
+            'name' => 'Name',
             'content' => 'Content',
-            'image' => 'Image',
             'price' => 'Price',
+            'keywords' => 'Keywords',
+            'description' => 'Description',
+            'img' => 'Img',
+            'hit' => 'Hit',
+            'new' => 'New',
+            'sale' => 'Sale',
         ];
     }
 
-    public function getCategory(){
-        return $this->hasOne(Category::class, ['id' => 'parent']);
+    public function getCategory()
+    {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 }
