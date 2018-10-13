@@ -2,6 +2,24 @@
 
  $('#sl2').slider();
  $('.catalog').dcAccordion({speed: 300});
+ $('.add-to-cart').on('click', function (e) {
+	 e.preventDefault();
+	 var id = $(this).data('id');
+	 $.ajax({
+         url: '/cart/add',
+         data: {
+             id: id
+         },
+         type: 'get',
+         success: function (res) {
+             console.log(res)
+
+         },
+         error: function () {
+             alert('Error ajax')
+         }
+     })
+ });
 
 	var RGBChange = function() {
 	  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
