@@ -2,7 +2,26 @@
 
  $('#sl2').slider();
  $('.catalog').dcAccordion({speed: 300});
- $('.add-to-cart').on('click', function (e) {
+
+function showCart(res) {
+    $('#cart .modal-body').html(res);
+    $('#cart').modal();
+}
+function clearCart() {
+    $.ajax({
+        url: '/cart/erase',
+        type: 'get',
+        success: function (res) {
+            // console.log(res)
+            showCart(res);
+        },
+        error: function () {
+            alert('Error ajax on erase')
+        }
+    })
+}
+
+$('.add-to-cart').on('click', function (e) {
 	 e.preventDefault();
 	 var id = $(this).data('id');
 	 $.ajax({
@@ -12,8 +31,8 @@
          },
          type: 'get',
          success: function (res) {
-             console.log(res)
-
+             // console.log(res)
+             showCart(res);
          },
          error: function () {
              alert('Error ajax')

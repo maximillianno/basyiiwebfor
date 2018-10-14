@@ -320,6 +320,17 @@ AppAsset::register($this);
 
     </footer><!--/Footer-->
 
+    <?php \yii\bootstrap\Modal::begin([
+            'header' => '<h2>Корзина</h2>',
+            'id' => 'cart',
+            'footer' => '<button type="button" class="btn btn-success" data-dismiss="modal">Продолжить покупки</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Оформить заказ</button>
+        <button type="button" class="btn btn-danger"  onclick="clearCart()">Очистить корзину</button>',
+
+    ]) ?>
+
+    <?php \yii\bootstrap\Modal::end() ?>
+
     <?php $this->endBody() ?>
     </body>
     </html>

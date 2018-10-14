@@ -14,6 +14,8 @@ class CartController extends AppController
         return $this->render('index');
     }
     public function actionAdd($id){
+
+        $this->layout = false;
         $product = Product::findOne($id);
         if (!$product){
             return false;
@@ -23,9 +25,27 @@ class CartController extends AppController
         $session->open();
         $cart = new Cart();
         $cart->addToCart($product);
+        $session->close();
+//        pre($session);
 
-        return;
+        return $this->render('cart-modal', compact('session'));
 //        return $product;
+    }
+
+    public function actionErase(){
+
+            $session = \Yii::$app->session;
+            $session->open();
+            $session->remove('cart');
+            $session->remove('cart.sum');
+            $session->remove('cart.qty');
+            $session->close();
+            $this->layout = false;
+            return $this->render('cart-modal', compact('session'));
+
+            $cart = new Cart();
+
+
     }
 
 }
