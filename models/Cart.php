@@ -35,5 +35,23 @@ class Cart extends ActiveRecord
 
     }
 
+    public function recalculate($id)
+    {
+        if (!isset($_SESSION['cart'][$id])){
+            return false;
+        }
+        if ($_SESSION['cart'][$id]['qty'] == 1){
+            $_SESSION['cart.qty'] = $_SESSION['cart.qty'] - 1;
+            $_SESSION['cart.sum'] = $_SESSION['cart.sum'] - $_SESSION['cart'][$id]['price'];
+            unset($_SESSION['cart'][$id]);
+        } else {
+            $_SESSION['cart'][$id]['qty']--;
+            $_SESSION['cart.qty'] = $_SESSION['cart.qty'] - 1;
+            $_SESSION['cart.sum'] = $_SESSION['cart.sum'] - $_SESSION['cart'][$id]['price'];
+
+        }
+
+    }
+
 
 }

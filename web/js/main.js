@@ -20,14 +20,47 @@ function clearCart() {
         }
     })
 }
+function getCart() {
+    event.preventDefault();
+    $.ajax({
+        url: '/cart/get',
+        type: 'get',
+        success: function (res) {
+            // console.log(res)
+            showCart(res);
+        },
+        error: function () {
+            alert('Error ajax on get')
+        }
+    })
+    // return false;
+}
+$('#cart .modal-body').on('click', '.del-item', function(){
+    $.ajax({
+        url: '/cart/delete',
+        data: {
+            id: $(this).data('id')
+        },
+        type: 'get',
+        success: function (res) {
+            // console.log(res)
+            showCart(res);
+        },
+        error: function () {
+            alert('Error ajax on erase')
+        }
+    })
+})
 
 $('.add-to-cart').on('click', function (e) {
 	 e.preventDefault();
 	 var id = $(this).data('id');
+     var  qty = $('#qty').val();
 	 $.ajax({
          url: '/cart/add',
          data: {
-             id: id
+             id: id,
+             qty: qty
          },
          type: 'get',
          success: function (res) {
