@@ -8,10 +8,10 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-//use app\assets\ltAppAsset;
+use app\assets\ltAppAsset;
 
 AppAsset::register($this);
-//ltAppAsset::register($this);
+ltAppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -20,7 +20,7 @@ AppAsset::register($this);
         <meta charset="<?= Yii::$app->charset ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
+        <title>Админка | <?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
 
         <?php
@@ -28,11 +28,11 @@ AppAsset::register($this);
         //        $this->registerJsFile('js/respond.min.js', ['position' => \yii\web\View::POS_HEAD, 'condition' => 'lte IE9']);
         ?>
 
-        <link rel="shortcut icon" href="/images/ico/favicon.ico">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="images/ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     </head><!--/head-->
 
     <body>
@@ -69,9 +69,7 @@ AppAsset::register($this);
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="<?= \yii\helpers\Url::home(); ?>">
-                                <?= Html::img('@web/images/home/logo.png', ['alt' => 'E-Shopper']) ?>
-                                </a>
+                            <a href="<?= \yii\helpers\Url::home()?>"><?= Html::img('@web/images/home/logo.png', ['alt' => 'E-SHOPPER'])?></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -101,12 +99,12 @@ AppAsset::register($this);
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
                                 <?php if (!Yii::$app->user->isGuest):  ?>
-                                <li><a href="<?= \yii\helpers\Url::to('/site/logout') ?>"><i class="fa fa-user"></i> Exit (<?= Yii::$app->user->identity->username ?>)</a></li>
+                                    <li><a href="<?= \yii\helpers\Url::to('/site/logout') ?>"><i class="fa fa-user"></i> Exit (<?= Yii::$app->user->identity->username ?>)</a></li>
                                 <?php endif; ?>
                                 <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                <li><a href="" onclick="getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                 <li><a href="<?= \yii\helpers\Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Login</a></li>
                             </ul>
                         </div>
@@ -152,9 +150,8 @@ AppAsset::register($this);
                     </div>
                     <div class="col-sm-3">
                         <div class="search_box pull-right">
-                            <form method="get" action="<?= \yii\helpers\Url::to(['category/search']) ?>">
-                                <input type="text" name="q" placeholder="Search"/>
-
+                            <form method="get" action="<?= \yii\helpers\Url::to(['category/search'])?>">
+                                <input type="text" placeholder="Search" name="q">
                             </form>
                         </div>
                     </div>
@@ -163,7 +160,9 @@ AppAsset::register($this);
         </div><!--/header-bottom-->
     </header><!--/header-->
 
-    <?= $content ?>
+    <div class="container">
+        <?= $content ?>
+    </div>
 
     <footer id="footer"><!--Footer-->
         <div class="footer-top">
@@ -322,17 +321,6 @@ AppAsset::register($this);
         </div>
 
     </footer><!--/Footer-->
-
-    <?php \yii\bootstrap\Modal::begin([
-            'header' => '<h2>Корзина</h2>',
-            'id' => 'cart',
-            'footer' => '<button type="button" class="btn btn-secondary" data-dismiss="modal">Продолжить покупки</button>
-        <a href="'.\yii\helpers\Url::to(['cart/view']).'" type="button" class="btn btn-success">Оформить заказ</a>
-        <button type="button" class="btn btn-danger"  onclick="clearCart()">Очистить корзину</button>',
-
-    ]) ?>
-
-    <?php \yii\bootstrap\Modal::end() ?>
 
     <?php $this->endBody() ?>
     </body>

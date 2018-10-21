@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Category;
 use app\models\Product;
+use Yii;
 use yii\data\Pagination;
 use yii\web\HttpException;
 
@@ -11,8 +12,9 @@ class CategoryController extends AppController
 {
     public function actionIndex()
     {
+
+
         $hits = Product::find()->where('hit=1')->limit(6)->all();
-//        dd($hits);
         $this->setMeta('E-shopper');
         return $this->render('index', compact('hits'));
     }

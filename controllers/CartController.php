@@ -16,6 +16,10 @@ class CartController extends AppController
         return $this->render('index');
     }
 
+    /**
+     * Просмотр корзины
+     * @return string
+     */
     public function actionGet()
     {
         $this->layout = false;
@@ -23,6 +27,11 @@ class CartController extends AppController
         return $this->render('cart-modal', compact('session'));
     }
 
+
+    /**
+     * Оформление заказа и его сохранение get, post
+     * @return string|\yii\web\Response
+     */
     public function actionView()
     {
         $session = \Yii::$app->session;
@@ -30,12 +39,23 @@ class CartController extends AppController
         $this->setMeta('Корзина');
         $order = new Order();
 
+        //Если post запрос
         if ($order->load(\Yii::$app->request->post())) {
             $order->qty = $session['cart.qty'];
             $order->sum = $session['cart.sum'];
+
+            //Сохранение заказа
             if ($order->save()) {
+
+                //Сохранение товаров заказа
                 $this->saveOrderItems($session['cart'], $order->id);
                 \Yii::$app->session->setFlash('success', 'Ваш заказ принят');
+
+                //Отправка почты
+                \Yii::$app->mailer->compose('order', ['session' => $session])
+                    ->setFrom('test_shop@mail.ru')->setSubject('Order')->send();
+
+                //Очистка корзины
                 $session->remove('cart');
                 $session->remove('cart.sum');
                 $session->remove('cart.qty');
@@ -48,6 +68,13 @@ class CartController extends AppController
         return $this->render('view', compact('order', 'session'));
     }
 
+
+    /**
+     * Добавление товара в корзину
+     * @param $id
+     * @param int $qty
+     * @return bool|string|\yii\web\Response
+     */
     public function actionAdd($id, $qty = 1)
     {
         if (!is_numeric($qty)) {
@@ -76,6 +103,11 @@ class CartController extends AppController
 //        return $product;
     }
 
+
+    /**
+     * Очистка корзины
+     * @return string
+     */
     public function actionErase()
     {
 
@@ -90,6 +122,11 @@ class CartController extends AppController
 
     }
 
+    /**
+     * Удаление товара в корзине через крестик
+     * @param $id
+     * @return string
+     */
     public function actionDelete($id)
     {
         $session = \Yii::$app->session;
@@ -103,6 +140,12 @@ class CartController extends AppController
         return $this->render('cart-modal', compact('session'));
     }
 
+    /**
+     * Функция сохранения промежуточной таблицы заказов_товаров
+     * TODO: Переделать на manytoMany
+     * @param $items
+     * @param $order_id
+     */
     protected function saveOrderItems($items, $order_id)
     {
         foreach ($items as $id => $item) {
