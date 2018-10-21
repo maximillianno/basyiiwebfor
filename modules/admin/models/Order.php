@@ -61,4 +61,9 @@ class Order extends \yii\db\ActiveRecord
             'address' => 'Адрес',
         ];
     }
+
+    public function getOrderItems(){
+        /** @noinspection PhpLanguageLevelInspection */
+        return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
+    }
 }

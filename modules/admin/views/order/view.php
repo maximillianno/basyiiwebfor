@@ -33,12 +33,48 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
             'qty',
             'sum',
-            'status',
+//            'status',
+            [
+                'attribute' => 'status',
+                'value' => function($data){
+                    return !$data->status ? '<span class="text-danger">Активен</span>' : '<span class="text-success">Завершен</span>';
+                },
+                'format' => 'html'
+
+            ],
             'name',
             'email:email',
             'phone',
             'address',
         ],
     ]) ?>
+    <?php $orderItems = $model->orderItems; ?>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+
+                <th>Наименование</th>
+                <th>Кол-во</th>
+                <th>Цена</th>
+                <th>Сумма</th>
+                <th><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($orderItems as $id => $item):?>
+                <tr>
+
+                    <td><a href="<?= \yii\helpers\Url::to(['/product/view', 'id' => $id])?>"><?= $item['name']?></a></td>
+                    <td><?= $item['qty_item']?></td>
+                    <td><?= $item['price']?></td>
+                    <td><?= $item['sum_item']?></td>
+                    <td><span data-id="<?= $id?>" class="glyphicon glyphicon-remove text-danger del-item" aria-hidden="true"></span></td>
+                </tr>
+            <?php endforeach?>
+
+            </tbody>
+        </table>
+    </div>
 
 </div>
