@@ -14,6 +14,7 @@ use yii\base\Widget;
 
 class MenuWidget extends Widget
 {
+    public $model;
     public $tpl;
     public $data;
     public $tree;
@@ -30,16 +31,23 @@ class MenuWidget extends Widget
 
     public function run()
     {
-        $menu = \Yii::$app->cache->get('menu');
-        if ($menu){
-            return $menu;
+        //Если закэшировано вернуть (Селект не кэшировать)
+        if ($this->tpl == 'menu.php'){
+            $menu = \Yii::$app->cache->get('menu');
+            if ($menu){
+                return $menu;
+            }
         }
         $this->data = Category::find()->indexBy('id')->asArray()->all();
 //        dd($this->data);
         $this->tree = $this->getTree();
         $this->menuHtml = $this->getMenuHtml($this->tree);
 //        dd($this->tree);
-        \Yii::$app->cache->set('menu', $this->menuHtml, 60);
+
+        //Закэшировать если главное, а не селект
+        if ($this->tpl == 'menu.php'){
+            \Yii::$app->cache->set('menu', $this->menuHtml, 60);
+        }
         return $this->menuHtml;
     }
 
@@ -58,16 +66,16 @@ class MenuWidget extends Widget
         return $tree;
     }
 
-    protected function getMenuHtml($tree)
+    protected function getMenuHtml($tree, $tab = '')
     {
         $str = '';
         foreach ($tree as $category) {
-            $str .= $this->categoryToTemplate($category);
+            $str .= $this->categoryToTemplate($category, $tab);
         }
         return $str;
     }
 
-    protected function categoryToTemplate($category)
+    protected function categoryToTemplate($category, $tab)
     {
         ob_start();
         include __DIR__.'/menu_tpl/'. $this->tpl;

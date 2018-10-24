@@ -127,7 +127,7 @@ ltAppAsset::register($this);
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="index.html" class="active">Home</a></li>
+                                <li><a href="<?= \yii\helpers\Url::home() ?>" class="active">Home</a></li>
                                 <li class="dropdown"><a href="#">Категории<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="<?= \yii\helpers\Url::to(['category/index']) ?>">Список категорий</a></li>
@@ -156,6 +156,14 @@ ltAppAsset::register($this);
     </header><!--/header-->
 
     <div class="container">
+        <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+        <?php endif; ?>
         <?= $content ?>
     </div>
 
