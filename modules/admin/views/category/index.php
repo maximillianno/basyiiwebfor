@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'attribute' => 'parent_id',
               'value' => function($data){
-                    return isset($data->category->name) ? $data->category->name : 'Самостоятельная категория';
+                    return !empty($data->category->name) ? $data->category->name : 'Самостоятельная категория';
               }
             ],
             'name',
