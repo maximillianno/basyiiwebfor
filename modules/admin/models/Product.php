@@ -21,6 +21,9 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+
+//    public $image;
+//    public $gallery;
     /**
      * {@inheritdoc}
      */
@@ -29,12 +32,23 @@ class Product extends \yii\db\ActiveRecord
         return 'product';
     }
 
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
+//            [['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, JPG'],
+//            [['gallery'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
             [['category_id', 'name'], 'required'],
             [['category_id'], 'integer'],
             [['content', 'hit', 'new', 'sale'], 'string'],
@@ -56,15 +70,26 @@ class Product extends \yii\db\ActiveRecord
             'price' => 'Цена',
             'keywords' => 'Keywords',
             'description' => 'Description',
-            'img' => 'Img',
-            'hit' => 'Hit',
-            'new' => 'New',
-            'sale' => 'Sale',
+//            'img' => 'Img',
+            'image' => 'Фото',
+            'hit' => 'Хит',
+            'new' => 'Новинка',
+            'sale' => 'Распродажа',
         ];
     }
 
     public function getCategory(){
         /** @noinspection PhpLanguageLevelInspection */
         return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
+    public function upload()
+    {
+        if ($this->validate()){
+            $path = 'files/store/';
+            $this->image->saveAs($path . $this->image->baseName . '.' . $this->image->extension);
+            return true;
+        }
+        return false;
     }
 }
