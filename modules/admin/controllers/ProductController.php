@@ -53,8 +53,12 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $image = $model->getImage();
+//        dd($image);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+//            'image' => $image
         ]);
     }
 

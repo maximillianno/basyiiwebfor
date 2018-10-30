@@ -47,7 +47,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            [['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, JPG'],
+//            [['image'], 'file', 'extensions' => 'png, jpg'],
 //            [['gallery'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
             [['category_id', 'name'], 'required'],
             [['category_id'], 'integer'],
@@ -86,8 +86,10 @@ class Product extends \yii\db\ActiveRecord
     public function upload()
     {
         if ($this->validate()){
-            $path = 'files/store/';
-            $this->image->saveAs($path . $this->image->baseName . '.' . $this->image->extension);
+            $path = 'files/store/' . $this->image->baseName . '.' . $this->image->extension;
+//            dd($path);
+            $this->image->saveAs($path);
+            $this->attachImage($path);
             return true;
         }
         return false;
