@@ -55,6 +55,7 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        Yii::$app->view->params['active'] = 'products';
         $model = $this->findModel($id);
         $image = $model->getImage();
 //        dd($image);
@@ -71,6 +72,7 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
+        Yii::$app->view->params['active'] = 'products';
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -92,6 +94,7 @@ class ProductController extends Controller
      */
     public function actionUpdate($id)
     {
+        Yii::$app->view->params['active'] = 'products';
         $model = $this->findModel($id);
         $model->img = 'no-image.png';
 
@@ -121,6 +124,7 @@ class ProductController extends Controller
      */
     public function actionDelete($id)
     {
+        Yii::$app->view->params['active'] = 'products';
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

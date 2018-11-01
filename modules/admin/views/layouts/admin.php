@@ -130,19 +130,19 @@ ltAppAsset::register($this);
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
 <!--                                <li><a href="--><?//= \yii\helpers\Url::to(['order/index']) ?><!--" class="active">Home</a></li>-->
-                                <li class="dropdown"><a class="<?= $this->params['active'] == 'category' ? 'active ':'' ?>" href="#">Категории<i class="fa fa-angle-down"></i></a>
+                                <li class="dropdown"><a class="<?= isset($this->params['active'])&& $this->params['active'] == 'category' ? 'active ':'' ?>" href="#">Категории<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="<?= \yii\helpers\Url::to(['category/index']) ?>">Список категорий</a></li>
                                         <li><a href="<?= \yii\helpers\Url::to(['category/create']) ?>">Добавить категорию</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown"><a href="#" class="<?= $this->params['active'] == 'products' ? 'active ':'' ?>">Товары<i class="fa fa-angle-down"></i></a>
+                                <li class="dropdown"><a href="#" class="<?= isset($this->params['active'])&& $this->params['active']  == 'products' ? 'active ':'' ?>">Товары<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="<?= \yii\helpers\Url::to(['product/index']) ?>">Список товаров</a></li>
                                         <li><a href="<?= \yii\helpers\Url::to(['product/create']) ?>">Добавить товар</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown"><a class="<?= $this->params['active'] == 'orders' ? 'active ':'' ?>" href="#">Заказы<i class="fa fa-angle-down"></i></a>
+                                <li class="dropdown"><a class="<?= isset($this->params['active'])&& $this->params['active']  == 'orders' ? 'active ':'' ?>" href="#">Заказы<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="<?= \yii\helpers\Url::to(['order/index']) ?>">Список заказов</a></li>
                                         <li><a href="<?= \yii\helpers\Url::to(['order/create']) ?>">Создать заказ</a></li>

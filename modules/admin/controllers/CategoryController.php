@@ -30,6 +30,8 @@ class CategoryController extends Controller
         ];
     }
 
+
+
     /**
      * Lists all Category models.
      * @return mixed
@@ -64,6 +66,7 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {
+        Yii::$app->view->params['active'] = 'category';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -77,6 +80,8 @@ class CategoryController extends Controller
     public function actionCreate()
     {
         $model = new Category();
+
+        Yii::$app->view->params['active'] = 'category';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'Категория добавлена');
@@ -103,6 +108,7 @@ class CategoryController extends Controller
 //        $res2 = \yii\helpers\ArrayHelper::map(\app\models\Category::find()->all(), 'id', 'name');
 //        dd($res1, $res2, $res5);
         $model = $this->findModel($id);
+        Yii::$app->view->params['active'] = 'category';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'Категория обновлена');
@@ -123,6 +129,7 @@ class CategoryController extends Controller
      */
     public function actionDelete($id)
     {
+        Yii::$app->view->params['active'] = 'category';
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

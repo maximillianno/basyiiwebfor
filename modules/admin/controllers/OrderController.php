@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\Module;
 use Yii;
 use app\modules\admin\models\Order;
 use yii\data\ActiveDataProvider;
@@ -26,6 +27,13 @@ class OrderController extends AppAdminController
                 ],
             ],
         ];
+    }
+
+    public function __construct($id, Module $module, array $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        //TODO: Переделать в категориях и продуктах
+        Yii::$app->view->params['active'] = 'orders';
     }
 
     /**
