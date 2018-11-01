@@ -45,10 +45,14 @@ class CategoryController extends Controller
 
         $dataProvider = new ActiveDataProvider([
             'query' => Category::find()->with('category'),
+
         ]);
 
+
+        Yii::$app->view->params['active'] = 'category';
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+
         ]);
     }
 

@@ -46,6 +46,8 @@ class OrderController extends AppAdminController
             ]
         ]);
 
+        Yii::$app->view->params['active'] = 'orders';
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);

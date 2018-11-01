@@ -37,32 +37,34 @@ ltAppAsset::register($this);
 
     <body>
     <?php $this->beginBody() ?>
-    <header id="header"><!--header-->
-        <div class="header_top"><!--header_top-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="contactinfo">
-                            <ul class="nav nav-pills">
-                                <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="social-icons pull-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--/header_top-->
+    <header id="header">
+        <!--header-->
+<!--        <div class="header_top"><!--header_top-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-sm-6">-->
+<!--                        <div class="contactinfo">-->
+<!--                            <ul class="nav nav-pills">-->
+<!--                                <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>-->
+<!--                                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-6">-->
+<!--                        <div class="social-icons pull-right">-->
+<!--                            <ul class="nav navbar-nav">-->
+<!--                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>-->
+<!--                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
+<!--                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>-->
+<!--                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>-->
+<!--                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!-- /header_top-->
 
         <div class="header-middle"><!--header-middle-->
             <div class="container">
@@ -71,29 +73,29 @@ ltAppAsset::register($this);
                         <div class="logo pull-left">
                             <a href="<?= \yii\helpers\Url::home()?>"><?= Html::img('@web/images/home/logo.png', ['alt' => 'E-SHOPPER'])?></a>
                         </div>
-                        <div class="btn-group pull-right">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                    USA
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Canada</a></li>
-                                    <li><a href="#">UK</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                    DOLLAR
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Canadian Dollar</a></li>
-                                    <li><a href="#">Pound</a></li>
-                                </ul>
-                            </div>
-                        </div>
+<!--                        <div class="btn-group pull-right">-->
+<!--                            <div class="btn-group">-->
+<!--                                <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">-->
+<!--                                    USA-->
+<!--                                    <span class="caret"></span>-->
+<!--                                </button>-->
+<!--                                <ul class="dropdown-menu">-->
+<!--                                    <li><a href="#">Canada</a></li>-->
+<!--                                    <li><a href="#">UK</a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!---->
+<!--                            <div class="btn-group">-->
+<!--                                <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">-->
+<!--                                    DOLLAR-->
+<!--                                    <span class="caret"></span>-->
+<!--                                </button>-->
+<!--                                <ul class="dropdown-menu">-->
+<!--                                    <li><a href="#">Canadian Dollar</a></li>-->
+<!--                                    <li><a href="#">Pound</a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
@@ -101,9 +103,9 @@ ltAppAsset::register($this);
                                 <?php if (!Yii::$app->user->isGuest):  ?>
                                     <li><a href="<?= \yii\helpers\Url::to('/site/logout') ?>"><i class="fa fa-user"></i> Exit (<?= Yii::$app->user->identity->username ?>)</a></li>
                                 <?php endif; ?>
-                                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-                                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+<!--                                <li><a href="#"><i class="fa fa-user"></i> Account</a></li>-->
+<!--                                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>-->
+<!--                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>-->
                                 <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                 <li><a href="<?= \yii\helpers\Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Login</a></li>
                             </ul>
@@ -127,16 +129,23 @@ ltAppAsset::register($this);
                         </div>
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="<?= \yii\helpers\Url::home() ?>" class="active">Home</a></li>
-                                <li class="dropdown"><a href="#">Категории<i class="fa fa-angle-down"></i></a>
+<!--                                <li><a href="--><?//= \yii\helpers\Url::to(['order/index']) ?><!--" class="active">Home</a></li>-->
+                                <li class="dropdown"><a class="<?= $this->params['active'] == 'category' ? 'active ':'' ?>" href="#">Категории<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="<?= \yii\helpers\Url::to(['category/index']) ?>">Список категорий</a></li>
                                         <li><a href="<?= \yii\helpers\Url::to(['category/create']) ?>">Добавить категорию</a></li>
                                     </ul>
                                 </li>
-                                <li class="dropdown"><a href="#">Товары<i class="fa fa-angle-down"></i></a>
+                                <li class="dropdown"><a href="#" class="<?= $this->params['active'] == 'products' ? 'active ':'' ?>">Товары<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="<?= \yii\helpers\Url::to(['product/index']) ?>">Список товаров</a></li>
+                                        <li><a href="<?= \yii\helpers\Url::to(['product/create']) ?>">Добавить товар</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown"><a class="<?= $this->params['active'] == 'orders' ? 'active ':'' ?>" href="#">Заказы<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="<?= \yii\helpers\Url::to(['order/index']) ?>">Список заказов</a></li>
+                                        <li><a href="<?= \yii\helpers\Url::to(['order/create']) ?>">Создать заказ</a></li>
                                     </ul>
                                 </li>
 

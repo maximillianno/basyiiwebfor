@@ -40,6 +40,8 @@ class ProductController extends Controller
             'query' => Product::find()->with('category'),
         ]);
 
+        Yii::$app->view->params['active'] = 'products';
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
