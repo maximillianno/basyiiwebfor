@@ -22,8 +22,8 @@ use Yii;
 class Product extends \yii\db\ActiveRecord
 {
 
-//    public $image;
-//    public $gallery;
+    public $image;
+    public $gallery;
     /**
      * {@inheritdoc}
      */
@@ -48,7 +48,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
 //            [['image'], 'file', 'extensions' => 'png, jpg'],
-//            [['gallery'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
+            [['gallery'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 4],
             [['category_id', 'name'], 'required'],
             [['category_id'], 'integer'],
             [['content', 'hit', 'new', 'sale'], 'string'],
@@ -72,6 +72,7 @@ class Product extends \yii\db\ActiveRecord
             'description' => 'Description',
 //            'img' => 'Img',
             'image' => 'Фото',
+            'gallery' => 'Галерея',
             'hit' => 'Хит',
             'new' => 'Новинка',
             'sale' => 'Распродажа',
@@ -86,10 +87,26 @@ class Product extends \yii\db\ActiveRecord
     public function upload()
     {
         if ($this->validate()){
+
             $path = 'files/store/' . $this->image->baseName . '.' . $this->image->extension;
 //            dd($path);
             $this->image->saveAs($path);
-            $this->attachImage($path);
+            $this->attachImage($path, true);
+            return true;
+        }
+        return false;
+    }
+    public function uploadGallery()
+    {
+        if ($this->validate()){
+            foreach ($this->gallery as $item) {
+
+                $path = 'files/store/' . $item->baseName . '.' . $item->extension;
+    //            dd($path);
+                $item->saveAs($path);
+                $this->attachImage($path, false);
+                @unlink($path);
+            }
             return true;
         }
         return false;

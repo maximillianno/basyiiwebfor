@@ -100,12 +100,20 @@ class ProductController extends Controller
 
 //        dd(UploadedFile::getInstance($model, 'image'));
             $model->image = UploadedFile::getInstance($model, 'image');
+            $model->gallery = UploadedFile::getInstances($model, 'gallery');
+            if(!empty($model->image) || !empty($model->gallery)){
+                $model->removeImages();
+            }
             if (!empty($model->image)){
                 $model->upload();
             }
+            if (!empty($model->gallery)){
+                $model->uploadGallery();
+            }
 
 //            dd($model);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+            Yii::$app->session->setFlash('success', "Товар {$model->name} обновлен");
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

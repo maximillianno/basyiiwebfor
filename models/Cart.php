@@ -12,6 +12,15 @@ use yii\db\ActiveRecord;
  */
 class Cart extends ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
     public function addToCart($product, $qty = 1)
     {
 

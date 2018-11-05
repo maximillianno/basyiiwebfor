@@ -35,6 +35,7 @@ use yii\widgets\ActiveForm;
 
     <?php // $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'image')->fileInput() ?>
+    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <?= $form->field($model, 'hit')->checkbox([ '0', '1' ]) ?>
 
