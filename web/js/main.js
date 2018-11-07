@@ -6,6 +6,7 @@
 function showCart(res) {
     $('#cart .modal-body').html(res);
     $('#cart').modal();
+    // return false;
 }
 function clearCart() {
     $.ajax({
@@ -14,6 +15,7 @@ function clearCart() {
         success: function (res) {
             // console.log(res)
             showCart(res);
+            // return false;
         },
         error: function () {
             alert('Error ajax on erase')
@@ -21,19 +23,21 @@ function clearCart() {
     })
 }
 function getCart() {
-    event.preventDefault();
+    // event.preventDefault();
+    // e.preventDefault();
     $.ajax({
         url: '/cart/get',
         type: 'get',
         success: function (res) {
             // console.log(res)
-            showCart(res);
+             showCart(res);
         },
         error: function () {
             alert('Error ajax on get')
         }
     })
-    // return false;
+    //Достаточно только тут вернуть false и перехода не происходит
+    return false;
 }
 $('#cart .modal-body').on('click', '.del-item', function(){
     $.ajax({
